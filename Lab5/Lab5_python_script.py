@@ -8,9 +8,9 @@ class Toolbox(object):
         self.alias = ""
 
         # List of tool classes associated with this toolbox
-        self.tools = [tool]
+        self.tools = [Tool]
 
-class tool(object):
+class Tool(object):
     def __init__(self):
         """Define the tool (tool name is the name of the class)."""
         self.label = "Building Proximity"
@@ -21,49 +21,49 @@ class tool(object):
     def getParameterInfo(self):
         """Define parameter definitions"""
         param0 = arcpy.Parameter(
-        displayName="GDB Folder",
-        name="GDBFolder",
-        datatype="DEFolder",
-        parameterType="Required",
-        direction="Input"
+             displayName="GDB Folder",
+             name="GDBFolder",
+             datatype="DEFolder",
+             parameterType="Required",
+             direction="Input"
         )
         param1 = arcpy.Parameter(
-        displayName="GDB Name",
-        name="GDBName",
-        datatype="GPString",
-        parameterType="Required",
-        direction="Input"
+             displayName="GDB Name",
+             name="GDBName",
+             datatype="GPString",
+             parameterType="Required",
+             direction="Input"
         )
         param2 = arcpy.Parameter(
-        displayName="Garage CSV File",
-        name="GarageCSVFile",
-        datatype="DEFile",
-        parameterType="Required",
-        direction="Input"
+             displayName="Garage CSV File",
+             name="GarageCSVFile",
+             datatype="DEFile",
+             parameterType="Required",
+             direction="Input"
         )
         param3 = arcpy.Parameter(
-        displayName="Garage Layer Name",
-        name="GarageLayerName",
-        datatype="GPString",
-        parameterType="Required",
-        direction="Input"
+             displayName="Garage Layer Name",
+             name="GarageLayerName",
+             datatype="GPString",
+             parameterType="Required",
+             direction="Input"
         )
         param4 = arcpy.Parameter(
-        displayName="Campus GDB",
-        name="CampusGDB",
-        datatype="DEType",
-        parameterType="Required",
-        direction="Input"
+             displayName="Campus GDB",
+             name="CampusGDB",
+             datatype="DEType",
+             parameterType="Required",
+             direction="Input"
         )
         param5 = arcpy.Parameter(
-        displayName="Buffer Distance",
-        name="BufferDistance",
-        datatype="GPDouble",
-        parameterType="Required",
-        direction="Input"
+             displayName="Buffer Distance",
+             name="BufferDistance",
+             datatype="GPDouble",
+             parameterType="Required",
+             direction="Input"
         )
         params = [param0, param1, param2, param3, param4, param5]
-        return param
+        return params
     
     def isLicensed(self):
         """Set whether tool is licensed to execute."""
@@ -93,7 +93,11 @@ class tool(object):
 
         input_layer = garages
         arcpy.FeatureClassToGeodatabase_conversion(input_layer, gdb_path)
-        garage_points = gdb_path + '\\' + 'Buildings'
+        garage_points = gdb_path + '\\' + garage_layer_name
+
+        campus = parameters[4].valueAsText
+        buildings_campus = campus + '\Structures'
+        buildings = gdb_path + '\\' + 'Buildings'
 
         arcpy.Copy_management(buildings_campus, buildings)
 
