@@ -97,7 +97,7 @@ class GraduatedColorsRenderer(object):
         # Loop through the Layers of the Map
         for layer in campus.listLayers():
             #Check if the Layer is a Feature Layer
-            if layer.featureLayer:
+            if layer.isFeatureLayer:
                 # Copy the Layer's Symbology
                 symbology = layer.symbology
                 # Make sure the symbology has renderer attribute
