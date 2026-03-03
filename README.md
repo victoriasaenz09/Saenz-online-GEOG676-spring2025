@@ -6,5 +6,5 @@
 |[Lab3](Lab3/Lab3_python_script.py)|
 |[Lab4](Lab4/Lab4_python_script.py)|
 |[Lab5](Lab5/Lab5_python_script.pyt)|
-|[Lab6](Lab6/README.md)|
+|[Lab6](Lab6/lab6_maptool.pyt)|
 |[Lab7](Lab7/README.md)|
